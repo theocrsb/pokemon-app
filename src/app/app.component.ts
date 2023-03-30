@@ -11,5 +11,10 @@ export class AppComponent implements OnInit {
   pokemonList = ['Bulbizarre', 'Salamèche', 'Carapuce'];
   ngOnInit(): void {
     console.table(this.pokemonList);
+    this.selectPokemon('Bulbizarre');
+  }
+
+  selectPokemon(pokemonName: string) {
+    console.log(`Vous avez cliqué sur le pokemon ${pokemonName}`);
   }
 }
