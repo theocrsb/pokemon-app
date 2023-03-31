@@ -1,5 +1,39 @@
 <div>
-    <h1>Liste de Pokémons</h1>
-<p>{{ pokemonList[0].name }}</p>
-<p>{{ pokemonList[3].name }}</p>
+  <h1 class="center">Liste de Pokémons</h1>
+  <!-- keyup => onChange -->
+  <!-- keyup.enter => onSumbit -->
+  <input #input type="number" (keyup.enter)="selectPokemon(input.value)" />
+
+  <div>
+    <!-- directive (structurelle ) ngIf -->
+    <!-- si pokémon : -->
+    <p class="center" *ngIf="pokemonSelect">
+      Vous avez selectionné le pokémon : {{ pokemonSelect?.name }}
+    </p>
+    <!-- si pas de pokémon : -->
+    <p class="center" *ngIf="!pokemonSelect">Aucun pokémon n'a été trouvé</p>
+  </div>
+
+  <!-- directive ngFor -->
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let pokemon of pokemonList" class="col m4">
+        <div class="card horizontal">
+          <!-- img -->
+          <div class="card-image">
+            <img [src]="pokemon.picture" alt="Pokémon" />
+          </div>
+          <!-- content -->
+          <div class="card-stacked">
+            <div class="card-content">
+              <p>{{ pokemon.name }}</p>
+              <p>
+                <small>{{ pokemon.created }}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
