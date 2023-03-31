@@ -29,7 +29,8 @@
             <div class="card-content">
               <p>{{ pokemon.name }}</p>
               <p>
-                <small>{{ pokemon.created | date }}</small>
+                <!-- ajout pipe date pour formater date -->
+                <small>{{ pokemon.created | date : "dd/MM/yyy" }}</small>
               </p>
             </div>
           </div>
