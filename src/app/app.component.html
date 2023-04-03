@@ -1,46 +1,7 @@
-<div>
-  <h1 class="center">Liste de Pokémons</h1>
-  <!-- keyup => onChange -->
-  <!-- keyup.enter => onSumbit -->
-  <input #input type="number" (keyup.enter)="selectPokemon(input.value)" />
-
-  <div>
-    <!-- directive (structurelle ) ngIf -->
-    <!-- si pokémon : -->
-    <p class="center" *ngIf="pokemonSelect">
-      Vous avez selectionné le pokémon : {{ pokemonSelect?.name }}
-    </p>
-    <!-- si pas de pokémon : -->
-    <p class="center" *ngIf="!pokemonSelect">Aucun pokémon n'a été trouvé</p>
+<nav>
+  <div class="nav-wrapper teal">
+    <a href="#" class="brand-logo center">Pokédex</a>
   </div>
-
-  <!-- directive ngFor -->
-  <div class="container">
-    <div class="row">
-      <div *ngFor="let pokemon of pokemonList" class="col m4">
-        <!-- ajout directive pkmnBorderCard -->
-        <div class="card horizontal" pkmnBorderCard="red">
-          <!-- img -->
-          <div class="card-image">
-            <img [src]="pokemon.picture" alt="Pokémon" />
-          </div>
-          <!-- content -->
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>{{ pokemon.name }}</p>
-              <p>
-                <!-- ajout pipe date pour formater date -->
-                <small>{{ pokemon.created | date : "dd/MM/yyy" }}</small>
-                <span
-                  *ngFor="let type of pokemon.types"
-                  class="{{ type | pokemonTypeColor }}"
-                  >{{ type }}
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+</nav>
+<!-- contenu en fonction de l'URL -->
+<router-outlet></router-outlet>
