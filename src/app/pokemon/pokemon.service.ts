@@ -10,7 +10,7 @@ export class PokemonService {
   // methodes :
   getPokemonList(): Observable<Pokemon[]> {
     return this.http.get<Pokemon[]>("api/pokemons").pipe(
-      tap((pokemonList) => console.table(pokemonList)),
+      tap((response) => this.log(response)),
       catchError((error) => {
         console.log(error);
         return of([]);
@@ -20,7 +20,7 @@ export class PokemonService {
 
   getPokemonById(pokemonId: number): Observable<Pokemon | undefined> {
     return this.http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
-      tap((pokemon) => console.log(pokemon)),
+      tap((response) => this.log(response)),
       catchError((error) => {
         console.log(error);
         return of(undefined);
@@ -28,7 +28,13 @@ export class PokemonService {
     );
   }
 
-  private log(response: Pokemon | Pokemon[] | undefined) {}
+  private log(response: Pokemon | Pokemon[] | undefined) {
+    console.table(response);
+  }
+  private handleError(err: Error, errorValue: [] | undefined) {
+    console.error(err);
+    return of(errorValue);
+  }
 
   getPokemonTypeList(): string[] {
     return [
