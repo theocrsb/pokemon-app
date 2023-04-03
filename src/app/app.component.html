@@ -31,6 +31,11 @@
               <p>
                 <!-- ajout pipe date pour formater date -->
                 <small>{{ pokemon.created | date : "dd/MM/yyy" }}</small>
+                <span
+                  *ngFor="let type of pokemon.types"
+                  class="{{ type | pokemonTypeColor }}"
+                  >{{ type }}
+                </span>
               </p>
             </div>
           </div>
