@@ -19,7 +19,7 @@
               <p>{{ pokemon.name }}</p>
               <p>
                 <!-- ajout pipe date pour formater date -->
-                <small>{{ pokemon.created | date : "dd/MM/yyy" }}</small>
+                <small>{{ pokemon.created | date : 'dd/MM/yyy' }}</small>
                 <span
                   *ngFor="let type of pokemon.types"
                   class="{{ type | pokemonTypeColor }}"
@@ -33,3 +33,9 @@
     </div>
   </div>
 </div>
+<a
+  class="btn-floating btn-large waves-effect waves-light red z-depth-3"
+  style="position: fixed; bottom: 25px; right: 25px"
+  routerLink="/pokemons/add"
+  >+</a
+>
