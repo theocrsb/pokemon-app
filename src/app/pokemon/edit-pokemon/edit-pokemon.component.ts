@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Pokemon } from "../pokemon";
-import { PokemonService } from "../pokemon.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Pokemon } from '../pokemon';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
-  selector: "app-edit-pokemon",
+  selector: 'app-edit-pokemon',
   template: `
     <div>
       <h2 class="center">Editer {{ pokemon?.name }}</h2>
@@ -25,9 +25,11 @@ export class EditPokemonComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const pokemonId: string | null = this.route.snapshot.paramMap.get("id");
+    const pokemonId: string | null = this.route.snapshot.paramMap.get('id');
     pokemonId
-      ? (this.pokemon = this.pokemonService.getPokemonById(+pokemonId))
+      ? this.pokemonService
+          .getPokemonById(+pokemonId)
+          .subscribe((pokemon) => (this.pokemon = pokemon))
       : (this.pokemon = undefined);
   }
 }

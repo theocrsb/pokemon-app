@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { catchError, Observable, of, tap } from "rxjs";
-import { Pokemon } from "./pokemon";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, of, tap } from 'rxjs';
+import { Pokemon } from './pokemon';
 
 @Injectable()
 export class PokemonService {
@@ -9,7 +9,7 @@ export class PokemonService {
 
   // methodes :
   getPokemonList(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>("api/pokemons").pipe(
+    return this.http.get<Pokemon[]>('api/pokemons').pipe(
       tap((response) => this.log(response)),
       catchError((error) => this.handleError(error, []))
     );
@@ -22,7 +22,25 @@ export class PokemonService {
     );
   }
 
-  private log(response: Pokemon | Pokemon[] | undefined) {
+  updatePokemon(pokemon: Pokemon): Observable<Pokemon | null> {
+    const httpOption = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    return this.http.put('api/pokemons', pokemon, httpOption).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, null))
+    );
+  }
+
+  deletePokemonById(pokemonId: number): Observable<null> {
+    return this.http.delete(`api/pokemons/${pokemonId}`).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, undefined))
+    );
+  }
+
+  private log(response: any) {
     console.table(response);
   }
   private handleError(err: Error, errorValue: any) {
@@ -32,17 +50,17 @@ export class PokemonService {
 
   getPokemonTypeList(): string[] {
     return [
-      "Plante",
-      "Poison",
-      "Feu",
-      "Insecte",
-      "Eau",
-      "Electrik",
-      "Normal",
-      "Fée",
-      "Vol",
-      "Combat",
-      "Psy",
+      'Plante',
+      'Poison',
+      'Feu',
+      'Insecte',
+      'Eau',
+      'Electrik',
+      'Normal',
+      'Fée',
+      'Vol',
+      'Combat',
+      'Psy',
     ];
   }
 }

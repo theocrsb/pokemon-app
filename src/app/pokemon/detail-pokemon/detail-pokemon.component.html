@@ -40,7 +40,7 @@
               <tr>
                 <td>Date de création</td>
                 <td>
-                  <em>{{ pokemon.created | date : "dd/MM/yyyy" }}</em>
+                  <em>{{ pokemon.created | date : 'dd/MM/yyyy' }}</em>
                 </td>
               </tr>
             </tbody>
@@ -49,6 +49,7 @@
         <div class="card-action">
           <a (click)="goToPokemonList()">Retour</a>
           <a (click)="goToEditPokemon(pokemon)">Editer</a>
+          <a (click)="deletePokemon(pokemon)">Supprimer</a>
         </div>
       </div>
     </div>
